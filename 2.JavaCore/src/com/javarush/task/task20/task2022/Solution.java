@@ -7,9 +7,11 @@ import java.io.*;
 */
 public class Solution implements Serializable, AutoCloseable {
     transient private FileOutputStream stream;
+    public String fileName;
 
     public Solution(String fileName) throws FileNotFoundException {
-        this.stream = new FileOutputStream(fileName);
+        this.fileName = fileName;
+        this.stream = new FileOutputStream(this.fileName);
     }
 
     public void writeObject(String string) throws IOException {
@@ -24,6 +26,7 @@ public class Solution implements Serializable, AutoCloseable {
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
+        stream = new FileOutputStream(this.fileName, true);
     }
 
     @Override
@@ -34,5 +37,22 @@ public class Solution implements Serializable, AutoCloseable {
 
     public static void main(String[] args) {
 
+        try (Solution solution = new Solution("FileForData")){
+            solution.writeObject("data1");
+            solution.writeObject("data2");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("SerFile"));
+            objectOutputStream.writeObject(solution);
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("SerFile"));
+            Solution s = (Solution) objectInputStream.readObject();
+            s.writeObject("Shalla");
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
