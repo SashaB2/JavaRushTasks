@@ -10,9 +10,11 @@ target/
 *.class
 *.info
 *.properties
+*.jar
 
 
+/5.OnlineInternship/
 /out/
 /JavaRushPlugin.properties
-/Инструкция.png
+/Instruction.png
 /out.log
