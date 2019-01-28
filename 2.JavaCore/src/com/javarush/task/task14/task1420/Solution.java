@@ -5,11 +5,7 @@ package com.javarush.task.task14.task1420;
 */
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import static oracle.jrockit.jfr.events.Bits.intValue;
 
 public class Solution {
     public static void main(String[] args) throws Exception {

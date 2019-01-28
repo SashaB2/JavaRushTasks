@@ -4,10 +4,6 @@ package com.javarush.task.task19.task1918;
 Знакомство с тегами
 */
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.parser.Parser;
-import org.jsoup.select.Elements;
 
 import java.io.*;
 
@@ -24,16 +20,16 @@ public class Solution {
         String tagName = args[0];
 //        String tagName = "span";
 //
-        FileReader fileReadear = new FileReader(fileName);
-        while(fileReadear.ready()) {
-            char a = (char)fileReadear.read();
-            fileContent += Character.toString(a);
-        }
-        fileReadear.close();
-
-        Document document = Jsoup.parse(fileContent.toString(), "", Parser.xmlParser());
-        Elements elements = document.select(tagName);
-        System.out.println(elements);
+//        FileReader fileReadear = new FileReader(fileName);
+//        while(fileReadear.ready()) {
+//            char a = (char)fileReadear.read();
+//            fileContent += Character.toString(a);
+//        }
+//        fileReadear.close();
+//
+//        Document document = Jsoup.parse(fileContent.toString(), "", Parser.xmlParser());
+//        Elements elements = document.select(tagName);
+//        System.out.println(elements);
     }
 }
 //         String tagName = "span";
