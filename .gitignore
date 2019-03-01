@@ -10,7 +10,7 @@ target/
 *.class
 *.info
 *.properties
-*.jar
+
 
 
 /5.OnlineInternship/
