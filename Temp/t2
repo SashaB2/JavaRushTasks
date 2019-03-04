@@ -1,0 +1,23 @@
+2019-03-02 16:24:23 INFO com.javarush.task.task26.task2604.Solution run Created JavaRushThread-1
+2019-03-02 16:24:23 INFO com.javarush.task.task26.task2604.Solution run Created JavaRushThread-2
+2019-03-02 16:24:23 INFO com.javarush.task.task26.task2604.Solution run Created JavaRushThread-3
+2019-03-02 16:24:23 INFO com.javarush.task.task26.task2604.Solution run Thread JavaRushThread-2 in progress...
+2019-03-02 16:24:23 INFO com.javarush.task.task26.task2604.Solution run Thread JavaRushThread-3 in progress...
+2019-03-02 16:24:23 INFO com.javarush.task.task26.task2604.Solution run Exiting JavaRushThread-2
+2019-03-02 16:24:23 INFO com.javarush.task.task26.task2604.Solution run Thread JavaRushThread-1 in progress...
+2019-03-02 16:24:23 SEVERE com.javarush.task.task26.task2604.Solution$1 uncaughtException An error occurred in thread JavaRushThread-2
+java.lang.RuntimeException: Oops JavaRushThread-2
+	at com.javarush.task.task26.task2604.Solution.run(Solution.java:53)
+
+2019-03-02 16:24:23 INFO com.javarush.task.task26.task2604.Solution run Exiting JavaRushThread-3
+2019-03-02 16:24:23 INFO com.javarush.task.task26.task2604.Solution run Exiting JavaRushThread-1
+2019-03-02 16:24:23 SEVERE com.javarush.task.task26.task2604.Solution$1 uncaughtException An error occurred in thread JavaRushThread-3
+java.lang.RuntimeException: Oops JavaRushThread-3
+	at com.javarush.task.task26.task2604.Solution.run(Solution.java:53)
+
+2019-03-02 16:24:23 SEVERE com.javarush.task.task26.task2604.Solution$1 uncaughtException An error occurred in thread JavaRushThread-1
+java.lang.RuntimeException: Oops JavaRushThread-1
+	at com.javarush.task.task26.task2604.Solution.run(Solution.java:53)
+
+
+Process finished with exit code 0
