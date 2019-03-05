@@ -3,7 +3,7 @@ package com.javarush.task.task30.task3008;
 import java.io.Serializable;
 
 public class Message  implements Serializable {
-    private static final long serialVersionUID = -6849794470754667710L;
+    private static final long serialVersionUID = -6568794470754667710L;
     private final MessageType type;
     private final String data;
 

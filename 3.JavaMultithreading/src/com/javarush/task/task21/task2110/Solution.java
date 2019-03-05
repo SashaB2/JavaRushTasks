@@ -38,8 +38,8 @@ public class Solution implements AutoCloseable{
         Charset charset = StandardCharsets.UTF_8;
         Path outputFilePath = Paths.get(outputFileName);
 
-        try (        BufferedWriter writer = Files.newBufferedWriter(outputFilePath, charset);
-                     ZipFile zip = new ZipFile(zipFileName)){
+        try (BufferedWriter writer = Files.newBufferedWriter(outputFilePath, charset);
+             ZipFile zip = new ZipFile(zipFileName)){
             String newLine = System.getProperty("line.separator");
             for (Enumeration entries = zip.entries(); entries.hasMoreElements(); ) {
                 String zipEntryName = ((ZipEntry) entries.nextElement()).getName() + newLine;
