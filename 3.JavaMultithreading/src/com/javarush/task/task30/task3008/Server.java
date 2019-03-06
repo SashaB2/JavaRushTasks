@@ -43,5 +43,27 @@ public class Server{
         @Override
         public void run() {
         }
+
+        private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException {
+           Message request;
+           Message messageAccept;
+           Message response;
+           String name;
+
+           request = new Message(MessageType.NAME_REQUEST);
+
+            do {
+                connection.send(request);
+                response = connection.receive();
+                name = response.getData();
+            } while (response.getType() != MessageType.USER_NAME || name.isEmpty() || connectionMap.containsKey(name));
+
+           connectionMap.put(name, connection);
+
+           messageAccept = new Message(MessageType.NAME_ACCEPTED);
+           connection.send(messageAccept);
+
+           return name;
+        }
     }
 }
