@@ -14,7 +14,7 @@ public class Server{
         try(ServerSocket serverSocket = new ServerSocket(port);) {
             ConsoleHelper.writeMessage("Server start");
             while (true) {
-                try (Socket socket = serverSocket.accept();){
+                try (Socket socket = serverSocket.accept()){
                     new Handler(socket).start();
                 } 
             }
@@ -35,6 +35,8 @@ public class Server{
 
     private static class Handler extends Thread{
         private Socket socket;
+        private Connection connection;
+        private String name;
 
         public Handler(Socket socket) {
             this.socket = socket;
@@ -42,6 +44,36 @@ public class Server{
 
         @Override
         public void run() {
+            ConsoleHelper.writeMessage(socket.getRemoteSocketAddress().toString());
+
+            try {
+                connection = new Connection(socket);
+
+                name = serverHandshake(connection);
+
+                notifyUsers(connection,name);
+
+                sendBroadcastMessage(new Message(MessageType.USER_ADDED, name));
+
+                serverMainLoop(connection, name);
+
+                connectionMap.entrySet().removeIf(name -> name.getKey().equals(name));
+
+                if(name != null){
+                    connectionMap.remove(name);
+                    sendBroadcastMessage(new Message(MessageType.USER_REMOVED, name));
+                }
+
+            } catch (IOException e) {
+                ConsoleHelper.writeMessage("Error with share data");
+            } catch (ClassNotFoundException e) {
+                ConsoleHelper.writeMessage("Error with share data");
+            }
+
+
+
+
+            ConsoleHelper.writeMessage("Connection close");
         }
 
         private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException {
@@ -69,7 +101,6 @@ public class Server{
         private void notifyUsers(Connection connection, String userName) throws IOException {
             for (Map.Entry<String, Connection> pair: connectionMap.entrySet()){
                 if(pair.getKey().equals(userName)) continue;
-                
                 connection.send(new Message(MessageType.USER_ADDED, pair.getKey()));
             }
         }
@@ -77,6 +108,7 @@ public class Server{
         private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException {
             Message response;
             Message transformedMessage;
+
             while(true) {
                 response = connection.receive();
                 if(response.getType() == MessageType.TEXT){
