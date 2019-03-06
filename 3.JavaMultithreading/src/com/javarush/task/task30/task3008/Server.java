@@ -48,7 +48,7 @@ public class Server{
 
             try {
                 connection = new Connection(socket);
-
+                
                 name = serverHandshake(connection);
 
                 notifyUsers(connection,name);
