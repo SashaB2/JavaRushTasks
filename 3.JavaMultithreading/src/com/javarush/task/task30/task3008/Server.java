@@ -69,8 +69,22 @@ public class Server{
         private void notifyUsers(Connection connection, String userName) throws IOException {
             for (Map.Entry<String, Connection> pair: connectionMap.entrySet()){
                 if(pair.getKey().equals(userName)) continue;
-
+                
                 connection.send(new Message(MessageType.USER_ADDED, pair.getKey()));
+            }
+        }
+
+        private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException {
+            Message response;
+            Message transformedMessage;
+            while(true) {
+                response = connection.receive();
+                if(response.getType() == MessageType.TEXT){
+                    transformedMessage = new Message(MessageType.TEXT, userName + ": " + response.getData());
+                    sendBroadcastMessage(transformedMessage);
+                }else if(response.getType() != MessageType.TEXT){
+                    ConsoleHelper.writeMessage("Error to get message");
+                }
             }
         }
     }
