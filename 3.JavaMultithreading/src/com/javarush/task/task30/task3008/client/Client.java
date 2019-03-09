@@ -98,6 +98,22 @@ public class Client {
             }
         }
 
+        @Override
+        public void run() {
+            String ip = getServerAddress();
+            int port = getServerPort();
+            try {
+                Socket socket = new Socket(ip, port);
+                connection = new Connection(socket);
+                clientHandshake();
+                clientMainLoop();
+            } catch (IOException e) {
+                notifyConnectionStatusChanged(false);
+            } catch (ClassNotFoundException e) {
+                notifyConnectionStatusChanged(false);
+            }
+
+        }
     }
 
     protected String getServerAddress(){
