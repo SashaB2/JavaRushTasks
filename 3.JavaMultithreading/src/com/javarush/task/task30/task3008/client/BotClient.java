@@ -20,6 +20,8 @@ public class BotClient extends Client {
             super.clientMainLoop();
         }
 
+
+
         @Override
         protected void processIncomingMessage(String message) {
             ConsoleHelper.writeMessage(message);
@@ -58,11 +60,6 @@ public class BotClient extends Client {
             else if(text.equalsIgnoreCase("секунды")){
                 dateFormat = new SimpleDateFormat("s");
             }
-
-//            formats.keySet().stream().filter(usMsg -> usMsg.equals(userMessage))
-//                    .forEach(s -> sendTextMessage(String.format("Информация для %s: %s",
-//                            userName, new SimpleDateFormat(formats.get(s)).format(Calendar.getInstance().getTime())
-//                    )));
 
             if(dateFormat != null) {
                 sendTextMessage("Информация для " + name + ": " + dateFormat.format(Calendar.getInstance().getTime()));
